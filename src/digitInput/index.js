@@ -1,7 +1,6 @@
 import React, { useRef, useEffect, useState } from 'react';
+import pi from './constants'
 
-const correctPi = ["3", "1", "4", "1", "5", "9", "2", "6", "5", "3", "5", "8",
-                   "9", "7", "9", "3", "2", "3", "8", "4", "6", "2", "6", "4"];
 var pi_index = 0;
 var piString = '';
 
@@ -9,6 +8,12 @@ function DigitInput({ numberOfDigits }) {
   
   // TODO:
   // - Don't make other boxes clickable
+  // - print 3 digits at a time
+  // - space them apart in threes
+  // - make digits bigger
+  // - only digits in boxes
+  // - add a digit counter
+  // - add a place for fun facts :)
 
   const [digits, setDigits] = useState(new Array(numberOfDigits).fill(""));
   const [knownDigits, setKnownDigits] =  useState(null);
@@ -29,7 +34,7 @@ function DigitInput({ numberOfDigits }) {
   function handleChange(value, index) {
 
     setPiCorrect(null);
-    if(value === correctPi[index + pi_index]){
+    if(value === pi[index + pi_index]){
       let newArr = [...digits];
       newArr[index] = value;
       setDigits(newArr);
@@ -47,7 +52,7 @@ function DigitInput({ numberOfDigits }) {
           setKnownDigits(piString);
         }else{
           for(let i = pi_index; i <= pi_index+5; i++){
-            piString = piString + correctPi[i];
+            piString = piString + pi[i];
           }
           setKnownDigits(piString);
         }
@@ -77,13 +82,14 @@ function DigitInput({ numberOfDigits }) {
   useEffect(() => {
     if(digits.join("") === ""){
       setPiError(null);
+      piBoxReference.current[0].focus();
     }
   }, [digits]);
 
   return (
     <article className="w-1/2">
       <p className="text-2xl text-center font-medium text-white mt-12">pi memorizer</p>
-      <p className="text-base text-white mt-6 mb-4">Digits of pi you know:</p>
+      <p className="text-base text-white mt-6 mb-4 shadow-inner">Digits of pi you know:</p>
 
       <p className="text-base text-black mt-4 bg-[#cbd6cd] p-4 rounded-md">{knownDigits}</p>
       
@@ -94,7 +100,7 @@ function DigitInput({ numberOfDigits }) {
         <input key={index} value={digit} maxLength={1}  
         onChange={(e)=> handleChange(e.target.value, index)}
         ref={(reference) => (piBoxReference.current[index] = reference)}
-        className={`border w-20 h-auto text-white p-3 rounded-md block bg-[#022e13] focus:border-2 focus:outline-none appearance-none`}
+        className={`border w-20 h-auto text-white text-[30px] text-center p-3 rounded-md block bg-[#022e13] focus:border-2 focus:outline-none appearance-none`}
         />
       ))}
 
