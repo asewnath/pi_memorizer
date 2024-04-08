@@ -2,16 +2,14 @@ import React, { useRef, useEffect, useState } from 'react';
 import pi from './constants'
 
 var pi_index = 0;
+var str_pi_index = 0;
 var piString = '';
 
 function DigitInput({ numberOfDigits }) {
   
   // TODO:
   // - Don't make other boxes clickable
-  // - print 3 digits at a time
   // - space them apart in threes
-  // - make digits bigger
-  // - only digits in boxes
   // - add a digit counter
   // - add a place for fun facts :)
 
@@ -40,22 +38,26 @@ function DigitInput({ numberOfDigits }) {
       setDigits(newArr);
       setPiError(null);
 
+
       if(value && index < numberOfDigits-1){
         piBoxReference.current[index + 1].focus();
       }
 
-      if( (index + 1) % 6 === 0){
-
+      if((index + 1) % 3 === 0){
         // Update knownDigits string
-        if(pi_index === 0){
-          piString = '3.14159';
+        if(str_pi_index === 0){
+          piString = '3.14';
           setKnownDigits(piString);
         }else{
-          for(let i = pi_index; i <= pi_index+5; i++){
+          for(let i = str_pi_index; i <= str_pi_index+2; i++){
             piString = piString + pi[i];
           }
           setKnownDigits(piString);
         }
+        str_pi_index = str_pi_index + 3;
+      }
+
+      if( (index + 1) % 6 === 0){
 
         pi_index = pi_index + 6;
         resetDigits();
@@ -70,6 +72,7 @@ function DigitInput({ numberOfDigits }) {
         setAttempt(false)
       }else{
         pi_index = 0;
+        str_pi_index = 0;
         piString = '';
         setKnownDigits(null);
         resetDigits();
@@ -90,12 +93,10 @@ function DigitInput({ numberOfDigits }) {
     <article className="w-1/2">
       <p className="text-2xl text-center font-medium text-white mt-12">pi memorizer</p>
       <p className="text-base text-white mt-6 mb-4 shadow-inner">Digits of pi you know:</p>
-
       <p className="text-base text-black mt-4 bg-[#cbd6cd] p-4 rounded-md">{knownDigits}</p>
-      
       <p className="text-base text-white mt-6 mb-4">Enter digits of pi:</p>
      
-     <div className='flex items-center gap-4'>
+     <div className='grid grid-cols-7 gap-4'>
       {digits.map((digit, index)=>(
         <input key={index} value={digit} maxLength={1}  
         onChange={(e)=> handleChange(e.target.value, index)}
@@ -103,10 +104,9 @@ function DigitInput({ numberOfDigits }) {
         className={`border w-20 h-auto text-white text-[30px] text-center p-3 rounded-md block bg-[#022e13] focus:border-2 focus:outline-none appearance-none`}
         />
       ))}
-
      </div>
-      
-     <p className={`text-lg text-white mt-4 ${piCorrect ? 'correct-show' : ''}`}>{piCorrect}</p>
+
+      <p className={`text-lg text-white mt-4 ${piCorrect ? 'correct-show' : ''}`}>{piCorrect}</p>
       <p className={`text-lg text-white mt-4 ${piError ? 'error-show' : ''}`}>{piError}</p>
     </article>
   );
