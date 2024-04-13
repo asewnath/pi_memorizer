@@ -25,6 +25,22 @@ function App() {
         </div>
       )}
 
+      <nav class="flex items-center justify-between flex-wrap bg-[#c76644] p-6 mb-10">
+        <div class="flex items-center flex-shrink-0 text-white mr-6">
+        <span class="font-semibold text-xl tracking-tight">pi memorizer</span>
+        </div>
+        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
+          <div class="text-sm lg:flex-grow">
+            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-black mr-4">
+              about
+            </a>
+            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-black">
+              help
+            </a>
+          </div>
+        </div>
+      </nav>
+
       <section className="flex flex-col items-center justify-center">
         <DigitInput numberOfDigits={6} />
       </section>

@@ -9,12 +9,11 @@ function DigitInput({ numberOfDigits }) {
   
   // TODO:
   // - Don't make other boxes clickable
-  // - space them apart in threes
   // - add a digit counter
   // - add a place for fun facts :)
 
-  const [digits, setDigits] = useState(new Array(numberOfDigits).fill(""));
-  const [knownDigits, setKnownDigits] =  useState(null);
+  const [digits, setDigits] = useState(new Array(numberOfDigits).fill(null));
+  const [knownDigits, setKnownDigits] =  useState("");
   const [piError, setPiError] = useState(null);
   const [piCorrect, setPiCorrect] = useState(null);
   const [attempt, setAttempt] = useState(true);
@@ -90,18 +89,17 @@ function DigitInput({ numberOfDigits }) {
   }, [digits]);
 
   return (
-    <article className="w-1/2">
-      <p className="text-2xl text-center font-medium text-white mt-12">pi memorizer</p>
-      <p className="text-base text-white mt-6 mb-4 shadow-inner">Digits of pi you know:</p>
-      <p className="text-base text-black mt-4 bg-[#cbd6cd] p-4 rounded-md">{knownDigits}</p>
-      <p className="text-base text-white mt-6 mb-4">Enter digits of pi:</p>
+    <article className="w-1/2 h-1/2 bg-[#ffffff] rounded-md p-6 shadow-lg">
+      <p className="text-base text-black mt-6 mb-4">Digits of pi you know:</p>
+      <p className="text-base text-black mt-4 bg-white p-4 rounded-md">{knownDigits}</p>
+      <p className="text-base text-black mt-6 mb-4">Enter digits of pi:</p>
      
-     <div className='grid grid-cols-7 gap-4'>
+     <div className='grid grid-cols-7 space-x-1'>
       {digits.map((digit, index)=>(
         <input key={index} value={digit} maxLength={1}  
         onChange={(e)=> handleChange(e.target.value, index)}
         ref={(reference) => (piBoxReference.current[index] = reference)}
-        className={`border w-20 h-auto text-white text-[30px] text-center p-3 rounded-md block bg-[#022e13] focus:border-2 focus:outline-none appearance-none`}
+        className={`border ${index === 2 ? 'grid-cols-subgrid col-span-2' : ''} w-20 h-auto text-black text-[30px] text-center p-3 rounded-md block bg-[#ffffff] focus:border-2 focus:outline-none appearance-none`}
         />
       ))}
      </div>

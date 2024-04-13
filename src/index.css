@@ -5,11 +5,11 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  background-color: #022e13;
+  background-color: #F1EEE0;
 }
 
 .correct-show{
-  color: rgb(26, 204, 2);
+  color: #5ca904;
 }
 
 .error-show {
