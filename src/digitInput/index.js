@@ -12,8 +12,8 @@ function DigitInput({ numberOfDigits }) {
   // - add a digit counter
   // - add a place for fun facts :)
 
-  const [digits, setDigits] = useState(new Array(numberOfDigits).fill(null));
-  const [knownDigits, setKnownDigits] =  useState("");
+  const [digits, setDigits] = useState(new Array(numberOfDigits).fill(""));
+  const [knownDigits, setKnownDigits] =  useState(null);
   const [piError, setPiError] = useState(null);
   const [piCorrect, setPiCorrect] = useState(null);
   const [attempt, setAttempt] = useState(true);
@@ -89,24 +89,28 @@ function DigitInput({ numberOfDigits }) {
   }, [digits]);
 
   return (
-    <article className="w-1/2 h-1/2 bg-[#ffffff] rounded-md p-6 shadow-lg">
-      <p className="text-base text-black mt-6 mb-4">Digits of pi you know:</p>
-      <p className="text-base text-black mt-4 bg-white p-4 rounded-md">{knownDigits}</p>
-      <p className="text-base text-black mt-6 mb-4">Enter digits of pi:</p>
-     
-     <div className='grid grid-cols-7 space-x-1'>
-      {digits.map((digit, index)=>(
-        <input key={index} value={digit} maxLength={1}  
-        onChange={(e)=> handleChange(e.target.value, index)}
-        ref={(reference) => (piBoxReference.current[index] = reference)}
-        className={`border ${index === 2 ? 'grid-cols-subgrid col-span-2' : ''} w-20 h-auto text-black text-[30px] text-center p-3 rounded-md block bg-[#ffffff] focus:border-2 focus:outline-none appearance-none`}
-        />
-      ))}
-     </div>
 
-      <p className={`text-lg text-white mt-4 ${piCorrect ? 'correct-show' : ''}`}>{piCorrect}</p>
-      <p className={`text-lg text-white mt-4 ${piError ? 'error-show' : ''}`}>{piError}</p>
-    </article>
+    <div className="w-3/5 bg-[#ffffff] rounded-lg p-6 shadow-lg"> 
+      <article className="bg-[#ffffff]">
+        <p className="text-base text-black mt-6 mb-4 font-semibold">Digits of pi you know:</p>
+        <p className="text-base text-black mt-4 bg-white p-4 rounded-md">{knownDigits}</p>
+        <p className="text-base text-black mt-6 mb-4 font-semibold">Enter digits of pi:</p>
+      
+      <div className='grid grid-cols-7 space-x-1'>
+        {digits.map((digit, index)=>(
+          <input key={index} value={digit} maxLength={1}  
+          onChange={(e)=> handleChange(e.target.value, index)}
+          ref={(reference) => (piBoxReference.current[index] = reference)}
+          className={`border ${index === 2 ? 'grid-cols-subgrid col-span-2' : ''} w-20 h-auto text-black text-[30px] text-center p-3 rounded-md block bg-[#ffffff] focus:border-2 focus:outline-none appearance-none`}
+          />
+        ))}
+      </div>
+
+        <p className={`text-lg text-white mt-4 ${piCorrect ? 'correct-show' : ''}`}>{piCorrect}</p>
+        <p className={`text-lg text-white mt-4 ${piError ? 'error-show' : ''}`}>{piError}</p>
+      </article>
+    </div>
+
   );
 }
 

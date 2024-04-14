@@ -40,8 +40,8 @@ function App() {
           </div>
         </div>
       </nav>
-
-      <section className="flex flex-col items-center justify-center">
+      
+      <section className="flex items-top justify-center min-h-96 max-w-7xl">
         <DigitInput numberOfDigits={6} />
       </section>
     </>
