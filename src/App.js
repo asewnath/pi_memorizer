@@ -1,7 +1,15 @@
-import DigitInput from "./digitInput";
+import DigitInput from "./components/digitInput";
+import LearnPi from "./components/learnPi";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 
 function App() {
+
+  // TODO:
+  // - have a router
+  // - create a routing for the different sections
+  // - conditionally navigate to LearnPi from DigitInput
+
   const [isDesktopView, setIsDesktopView] = useState(false);
 
   useEffect(() => {
@@ -41,9 +49,12 @@ function App() {
         </div>
       </nav>
       
-      <section className="flex items-top justify-center min-h-96 max-w-7xl">
-        <DigitInput numberOfDigits={6} />
-      </section>
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<DigitInput />} />
+          <Route path="learnPi" element={<LearnPi />} />
+        </Routes>
+      </BrowserRouter>
     </>
   );
 }
