@@ -16,10 +16,10 @@ function DigitInput() {
   const [digits, setDigits] = useState(new Array(6).fill(""));
   const [knownDigits, setKnownDigits] =  useState(null);
   const [piError, setPiError] = useState(null);
-  const [piIndexState, setPiIndexState] = useState(0);
   const [piCorrect, setPiCorrect] = useState(null);
   const [attempt, setAttempt] = useState(true);
   const piBoxReference = useRef([]);
+
   const navigate = useNavigate();
 
   const resetDigits = () => {
@@ -57,7 +57,6 @@ function DigitInput() {
       }
       if( (index + 1) % 6 === 0){
         pi_index = pi_index + 6;
-        setPiIndexState(pi_index);
         resetDigits();
         setAttempt(true);
         setPiCorrect("Correct! Enter next 6 digits");
@@ -67,14 +66,7 @@ function DigitInput() {
         setPiError("❌ Incorrect digit, one more try");
         setAttempt(false)
       }else{
-        navigate("learnPi", {state: piIndexState});
-        //pi_index = 0;
-        //str_pi_index = 0;
-        //piString = '';
-        //setKnownDigits(null);
-        //resetDigits();
-        //setPiError(null);
-        //setAttempt(true);
+        navigate("learnPi", {state: {pi_index:pi_index, known:knownDigits}});
       }
     }
   }
@@ -89,7 +81,7 @@ function DigitInput() {
   return (
 
     <section className="flex items-top justify-center min-h-96 max-w-7xl">
-  `    <div className="w-3/5 bg-white rounded-lg p-6 shadow-lg"> 
+      <div className="w-3/5 bg-white rounded-lg p-6 shadow-lg"> 
         <article className="bg-white">
           <p className="text-base text-black mt-6 mb-4 font-semibold">Digits of pi you know:</p>
           <p className="text-base text-black mt-4 bg-white p-4 rounded-md">{knownDigits}</p>
