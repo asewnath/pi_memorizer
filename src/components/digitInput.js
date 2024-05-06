@@ -7,7 +7,7 @@ var str_pi_index = 0;
 var piString = '';
 
 function DigitInput() {
-  
+
   // TODO:
   // - Don't make other boxes clickable
   // - add a digit counter
@@ -66,11 +66,15 @@ function DigitInput() {
         setPiError("❌ Incorrect digit, one more try");
         setAttempt(false)
       }else{
-        navigate("learnPi", {state: {pi_index:pi_index, known:knownDigits}});
+        let tmp_pi_index = pi_index
+        pi_index = 0;
+        str_pi_index = 0;
+        piString = '';
+        navigate("learnPi", {state: {pi_index:tmp_pi_index, known:knownDigits}});
       }
     }
   }
-
+  
   useEffect(() => {
     if(digits.join("") === ""){
       setPiError(null);
