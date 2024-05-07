@@ -1,6 +1,9 @@
-# pi_memorizer
+# pi Memorizer
 
+When I was in middle school, I memorized around 160 digits of pi to win
+ten points of extra credit in math class. As I was preparing for the
+competition, I noticed that I developed my own system for learning digits of pi.
+This tool, pi_memorizer, mimics my approach for memorizing pi.
 
-In the seventh grade, I learned around 160 digits of pi to get some extra
-credit on pi day. I did this by learning pi in groups of three. This tool
-mimics how I memorized pi's digits.
+Enjoy! I hope you can use this tool to memorize some digits of pi to
+impress people on pi day!
