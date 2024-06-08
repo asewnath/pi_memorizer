@@ -88,16 +88,17 @@ function LearnPi(){
 
   useEffect(() => {
     // Handle click events
+    const curr_ref = piBoxReference.current;
     const handleMouseDown = (event) => {
       event.preventDefault();
     }
-    piBoxReference.current.forEach((box) => {
+    curr_ref.forEach((box) => {
       if (box) {
         box.addEventListener('mousedown', handleMouseDown);
       }
     });
     return () => {
-      piBoxReference.current.forEach((box) => {
+      curr_ref.forEach((box) => {
         if (box) {
           box.removeEventListener('mousedown', handleMouseDown);
         }
