@@ -1,4 +1,4 @@
-# pi Memorizer
+# π memorizer
 
 When I was in middle school, I memorized around 160 digits of pi to win
 ten points of extra credit in math class. As I was preparing for the
