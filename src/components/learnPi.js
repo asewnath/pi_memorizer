@@ -17,6 +17,7 @@ function LearnPi(){
   const navigate = useNavigate();
 
   const resetDigits = () => {
+    // Reset text boxes
     let newArr = [...digits];
     for(let i = 0; i < 6; i++){
       newArr[i] = "";
@@ -26,11 +27,11 @@ function LearnPi(){
   }
 
   function handleChange(value, index) {
+    // Handle correct values
     if(value === pi[index + pi_index]){
       let newArr = [...digits];
       newArr[index] = value;
       setDigits(newArr);
-      
       if(value && index < 5){
         piBoxReference.current[index + 1].focus();
       }
@@ -42,10 +43,13 @@ function LearnPi(){
         round = 1
         navigate("/");
       }
+    }else{
+      round = Math.max(round-1, 1)
     }
   }
 
   useEffect(() => {
+    // Update rounds based on user progress
     let newArr = [...currDigits];
     if(round === 1){
       for(let i = 0; i < 6; i++){
@@ -81,6 +85,26 @@ function LearnPi(){
     }
   }, [digits]);
 
+
+  useEffect(() => {
+    // Handle click events
+    const handleMouseDown = (event) => {
+      event.preventDefault();
+    }
+    piBoxReference.current.forEach((box) => {
+      if (box) {
+        box.addEventListener('mousedown', handleMouseDown);
+      }
+    });
+    return () => {
+      piBoxReference.current.forEach((box) => {
+        if (box) {
+          box.removeEventListener('mousedown', handleMouseDown);
+        }
+      });
+    };
+  }, []);
+
   return(
 
     <section className="flex items-top justify-center min-h-96 max-w-7xl">
@@ -98,7 +122,12 @@ function LearnPi(){
             />
           ))}
           {digits.map((digit, index)=>(
-            <input key={index} value={digit} maxLength={1}  
+            <input key={index} value={digit} maxLength={1}
+            onBlur={e => {
+              if (e.relatedTarget === null) {
+                  e.target.focus();
+              }
+            }}
             onChange={(e)=> handleChange(e.target.value, index)}
             ref={(reference) => (piBoxReference.current[index] = reference)}
             className={`border ${index === 2 ? 'grid-cols-subgrid col-span-2' : ''} w-20 h-auto text-black text-[30px] text-center p-3 rounded-md block bg-[#ffffff] focus:border-2 focus:outline-none appearance-none`}

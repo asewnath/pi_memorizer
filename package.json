@@ -1,6 +1,6 @@
 {
-  "name": "react-advance-inputs",
-  "version": "0.1.0",
+  "name": "pi_memorizer",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",

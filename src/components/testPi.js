@@ -5,28 +5,19 @@ import { useNavigate } from "react-router-dom";
 var pi_index = 0;
 var str_pi_index = 0;
 var piString = '';
-var focus_index = 0;
 
 function TestPi() {
 
-  /*
-   TODO:
-   - Each square should have two tries
-   - Slower transition between learn and test
-   - Back and forth between states in learn
-   - add a digit counter
-  */
-
   const [digits, setDigits] = useState(new Array(6).fill(""));
-  const [knownDigits, setKnownDigits] =  useState(null);
+  const [knownDigits, setKnownDigits] =  useState("None");
   const [piError, setPiError] = useState(null);
   const [piCorrect, setPiCorrect] = useState(null);
   const [attempt, setAttempt] = useState(true);
   const piBoxReference = useRef([]);
-
   const navigate = useNavigate();
 
   const resetDigits = () => {
+    // Clear textboxes and initialize focus
     let newArr = [...digits];
     for(let i = 0; i < 6; i++){
       newArr[i] = "";
@@ -36,17 +27,21 @@ function TestPi() {
   }
 
   function handleChange(value, index) {
-    
+    // Handle digit input
     setPiCorrect(null);
     if(value === pi[index + pi_index]){
       let newArr = [...digits];
       newArr[index] = value;
       setDigits(newArr);
       setPiError(null);
+      setAttempt(true);
 
+      // Set focus
       if(value && index < 5){
         piBoxReference.current[index + 1].focus();
       }
+
+      // Update known digits
       if((index + 1) % 3 === 0){
         if(str_pi_index === 0){
           piString = '3.14';
@@ -59,13 +54,16 @@ function TestPi() {
         }
         str_pi_index = str_pi_index + 3;
       }
+
+      // Move onto next 6 digits
       if( (index + 1) % 6 === 0){
         pi_index = pi_index + 6;
         resetDigits();
-        setAttempt(true);
         setPiCorrect("Correct! Enter next 6 digits");
       }
+
     }else{
+      // Handle incorrect input
       if(attempt){
         setPiError("❌ Incorrect digit, one more try");
         setAttempt(false)
@@ -80,6 +78,7 @@ function TestPi() {
   }
 
   useEffect(() => {
+    // If text boxes are empty, set focus to first element
     if(digits.join("") === ""){
       setPiError(null);
       piBoxReference.current[0].focus();
@@ -87,6 +86,7 @@ function TestPi() {
   }, [digits]);
 
   useEffect(() => {
+    // Handle click events
     const handleMouseDown = (event) => {
       event.preventDefault();
     }
@@ -105,7 +105,6 @@ function TestPi() {
   }, []);
 
   return (
-
     <section className="flex items-top justify-center min-h-96 max-w-7xl">
       <div className="w-3/5 bg-white rounded-lg p-6 shadow-lg"> 
         <article className="bg-white">
