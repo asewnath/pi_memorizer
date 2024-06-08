@@ -5,13 +5,17 @@ import { useNavigate } from "react-router-dom";
 var pi_index = 0;
 var str_pi_index = 0;
 var piString = '';
+var focus_index = 0;
 
-function DigitInput() {
+function TestPi() {
 
-  // TODO:
-  // - Don't make other boxes clickable
-  // - add a digit counter
-  // - add a place for fun facts
+  /*
+   TODO:
+   - Each square should have two tries
+   - Slower transition between learn and test
+   - Back and forth between states in learn
+   - add a digit counter
+  */
 
   const [digits, setDigits] = useState(new Array(6).fill(""));
   const [knownDigits, setKnownDigits] =  useState(null);
@@ -32,7 +36,7 @@ function DigitInput() {
   }
 
   function handleChange(value, index) {
-
+    
     setPiCorrect(null);
     if(value === pi[index + pi_index]){
       let newArr = [...digits];
@@ -74,7 +78,7 @@ function DigitInput() {
       }
     }
   }
-  
+
   useEffect(() => {
     if(digits.join("") === ""){
       setPiError(null);
@@ -82,18 +86,41 @@ function DigitInput() {
     }
   }, [digits]);
 
+  useEffect(() => {
+    const handleMouseDown = (event) => {
+      event.preventDefault();
+    }
+    piBoxReference.current.forEach((box) => {
+      if (box) {
+        box.addEventListener('mousedown', handleMouseDown);
+      }
+    });
+    return () => {
+      piBoxReference.current.forEach((box) => {
+        if (box) {
+          box.removeEventListener('mousedown', handleMouseDown);
+        }
+      });
+    };
+  }, []);
+
   return (
 
     <section className="flex items-top justify-center min-h-96 max-w-7xl">
       <div className="w-3/5 bg-white rounded-lg p-6 shadow-lg"> 
         <article className="bg-white">
-          <p className="text-base text-black mt-6 mb-4 font-semibold">Digits of pi you know:</p>
+          <p className="text-base text-black mt-6 mb-4 font-semibold">Digits of π you know:</p>
           <p className="text-base text-black mt-4 bg-white p-4 rounded-md">{knownDigits}</p>
-          <p className="text-base text-black mt-6 mb-4 font-semibold">Enter digits of pi:</p>
+          <p className="text-base text-black mt-6 mb-4 font-semibold">Test: enter digits of π:</p>
         
         <div className='grid grid-cols-7 space-x-1'>
           {digits.map((digit, index)=>(
-            <input key={index} value={digit} maxLength={1}  
+            <input key={index} value={digit} maxLength={1}
+            onBlur={e => {
+              if (e.relatedTarget === null) {
+                  e.target.focus();
+              }
+            }}
             onChange={(e)=> handleChange(e.target.value, index)}
             ref={(reference) => (piBoxReference.current[index] = reference)}
             className={`border ${index === 2 ? 'grid-cols-subgrid col-span-2' : ''} w-20 h-auto text-black text-[30px] text-center p-3 rounded-md block bg-[#ffffff] focus:border-2 focus:outline-none appearance-none`}
@@ -110,4 +137,4 @@ function DigitInput() {
   );
 }
 
-export default DigitInput;
+export default TestPi;

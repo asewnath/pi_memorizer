@@ -9,6 +9,10 @@ body {
   height: 100%;
 }
 
+.no_click{
+  pointer-events: none;
+}
+
 .correct-show{
   color: #5ca904;
 }

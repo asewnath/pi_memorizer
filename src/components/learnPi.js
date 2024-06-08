@@ -86,9 +86,9 @@ function LearnPi(){
     <section className="flex items-top justify-center min-h-96 max-w-7xl">
       <div className="w-3/5 bg-white rounded-lg p-6 shadow-lg"> 
         <article className="bg-white">
-        <p className="text-base text-black mt-6 mb-4 font-semibold">Digits of pi you know:</p>
+        <p className="text-base text-black mt-6 mb-4 font-semibold">Digits of π you know:</p>
         <p className="text-base text-black mt-4 bg-white p-4 rounded-md">{knownDigits}</p>
-        <p className="text-base text-black mt-6 mb-4 font-semibold">Fill in the numbers:</p>
+        <p className="text-base text-black mt-6 mb-4 font-semibold">Learn: fill in the numbers:</p>
         <div className='grid grid-cols-7 space-x-1'>
 
           {currDigits.map((digit, index)=>(

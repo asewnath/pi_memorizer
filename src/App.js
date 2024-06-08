@@ -1,14 +1,9 @@
-import DigitInput from "./components/digitInput";
+import TestPi from "./components/testPi";
 import LearnPi from "./components/learnPi";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import React, { useEffect, useState } from 'react';
 
 function App() {
-
-  // TODO:
-  // - have a router
-  // - create a routing for the different sections
-  // - conditionally navigate to LearnPi from DigitInput
 
   const [isDesktopView, setIsDesktopView] = useState(false);
 
@@ -35,23 +30,13 @@ function App() {
 
       <nav class="flex items-center justify-between flex-wrap bg-[#c76644] p-6 mb-10">
         <div class="flex items-center flex-shrink-0 text-white mr-6">
-        <span class="font-semibold text-xl tracking-tight">pi memorizer</span>
-        </div>
-        <div class="w-full block flex-grow lg:flex lg:items-center lg:w-auto">
-          <div class="text-sm lg:flex-grow">
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-black mr-4">
-              about
-            </a>
-            <a href="#responsive-header" class="block mt-4 lg:inline-block lg:mt-0 text-white hover:text-black">
-              help
-            </a>
-          </div>
+        <span class="font-semibold text-xl tracking-tight">π memorizer</span>
         </div>
       </nav>
       
       <BrowserRouter>
         <Routes>
-          <Route path="/" element={<DigitInput />} />
+          <Route path="/" element={<TestPi />} />
           <Route path="learnPi" element={<LearnPi />} />
         </Routes>
       </BrowserRouter>
