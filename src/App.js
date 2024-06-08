@@ -24,7 +24,7 @@ function App() {
       {/* Block view on small device */}
       {isDesktopView && (
         <div className="fixed top-0 left-0 w-full h-full bg-[#022e13] flex items-center justify-center">
-          <p className="text-white text-sm p-4">Please view this content on a desktop device for the best experience.</p>
+          <p className="text-white text-sm p-4">Please view this content on a desktop device for the best experience. If you're on a desktop device, increase the screen size.</p>
         </div>
       )}
 
