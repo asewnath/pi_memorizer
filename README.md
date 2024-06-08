@@ -5,4 +5,4 @@ ten points of extra credit in math class. As I was preparing for the
 competition, I noticed that I had developed my own system for learning π.
 This tool mimics my approach.
 
-[π memorizer website](https://pi-memorizer.netlify.app/). Enjoy!
+Enjoy! [π memorizer website](https://pi-memorizer.netlify.app/)
